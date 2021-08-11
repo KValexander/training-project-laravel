@@ -19,7 +19,8 @@ class CreateUserModelsTable extends Migration
             $table->string("email", 100);
             $table->string("login", 100);
             $table->string("password", 100);
-            $table->string("remember_token", 100);
+            $table->string("remember_token", 100)->nullable();
+            $table->string("role", 30);
             $table->timestamps();
         });
     }
