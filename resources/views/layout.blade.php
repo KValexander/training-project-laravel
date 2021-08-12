@@ -14,8 +14,13 @@
 			<div class="head">
 				<a href="{{ route('main_page') }}"><h1>Games</h1></a>
 				<nav>
-					<a href="{{ route('register_page') }}">Регистрация</a>
-					<a href="{{ route('login_page') }}">Войти</a>
+					@if($role == "guest")
+						<a href="{{ route('register_page') }}">Регистрация</a>
+						<a href="{{ route('login_page') }}">Войти</a>
+					@else
+						<a href="{{ route('personal_area') }}">Личный кабинет</a>
+						<a href="{{ route('logout') }}">Выход</a>
+					@endif
 				</nav>
 			</div>
 		</div>

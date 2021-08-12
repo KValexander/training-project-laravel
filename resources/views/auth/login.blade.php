@@ -11,7 +11,7 @@
 
 				<p class="error">{{ $errors->login->first() }}</p>
 				<input type="text" name="login" placeholder="Логин">
-				<input type="text" name="password" placeholder="Пароль">
+				<input type="password" name="password" placeholder="Пароль">
 
 				<input type="submit" value="Войти">
 

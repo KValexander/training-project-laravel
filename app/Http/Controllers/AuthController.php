@@ -60,13 +60,16 @@ class AuthController extends Controller
 
         // In case of authorization
         if(Auth::attempt(["login" => $login, "password" => $password], true))
-            return redirect()->route("main_page")->withErrors("Вы вошли", "message");
+            return redirect()->route("personal_area");
         // In case of not authorization
         else return redirect()->route("login_page")->withErrors("Ошибка логина или пароля", "login");
     }
 
     // Logout
     public function logout() {
-    	
+    	// Logout from authorization
+        Auth::logout();
+        // Redirect to the main page with a message about the exit from authorization
+        return redirect()->route("main_page")->withErrors("Вы вышли", "message");
     }
 }
