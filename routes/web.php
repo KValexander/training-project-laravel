@@ -29,6 +29,15 @@ Route::group(["middleware" => "session"], function() {
 		// Personal area
 		Route::get("/personal_area", [UserController::class, "personal_area"])->name("personal_area");
 
+		// User data update page
+		Route::get("/personal_area/update", [UserController::class, "personal_area_update_page"])->name("personal_area_update_page");
+
+		// User data update
+		Route::post("/personal_area/update", [UserController::class, "personal_area_update"])->name("personal_area_update");
+
+		// Delete user
+		Route::get("/personal_area/delete", [UserController::class, "personal_area_delete"])->name("personal_area_delete");
+
 		// Logout
 		Route::get("/logout", [AuthController::class, "logout"])->name("logout");
 	

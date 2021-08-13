@@ -3,8 +3,7 @@
 @section("title") Регистрация @endsection
 
 @section("content")
-	<div class="wrap">
-		<form action="{{ route('register') }}" method="POST">
+		<form class="register" action="{{ route('register') }}" method="POST">
 			<fieldset>
 				<legend>Регистрация</legend>
 				{{ csrf_field() }}
@@ -29,5 +28,4 @@
 				<p class="center">Уже зарегистрированы? Тогда <a class="underline" href="{{ route('login_page') }}">войдите</a></p>
 			</fieldset>
 		</form>
-	</div>
 @endsection
