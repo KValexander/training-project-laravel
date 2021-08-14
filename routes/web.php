@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GameController;
 
 // Session group
 Route::group(["middleware" => "session"], function() {
@@ -25,6 +26,12 @@ Route::group(["middleware" => "session"], function() {
 
 	// Auth Group
 	Route::group(["middleware" => "auth"], function() {
+
+		// Add game page
+		Route::get("/game/add", [GameController::class, "game_add_page"])->name("game_add_page");
+
+		// Add game
+		Route::post("/game/add", [GameController::class, "game_add"])->name("game_add");
 		
 		// Personal area
 		Route::get("/personal_area", [UserController::class, "personal_area"])->name("personal_area");

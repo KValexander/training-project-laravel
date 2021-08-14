@@ -3,7 +3,7 @@
 @section("title") Регистрация @endsection
 
 @section("content")
-		<form class="register" action="{{ route('register') }}" method="POST">
+		<form class="center" action="{{ route('register') }}" method="POST">
 			<fieldset>
 				<legend>Регистрация</legend>
 				{{ csrf_field() }}

@@ -18,6 +18,7 @@
 						<a href="{{ route('register_page') }}">Регистрация</a>
 						<a href="{{ route('login_page') }}">Войти</a>
 					@else
+						<a href="{{ route('game_add_page') }}">Добавить игру</a>
 						<a href="{{ route('personal_area') }}">Личный кабинет</a>
 						<a href="{{ route('logout') }}">Выход</a>
 					@endif
