@@ -17,6 +17,9 @@
 		</div>
 		<div class="right">
 			<a href="{{ route('personal_area_update_page') }}"><h3>Изменить данные</h3></a> <br>
+			@if($role == "admin" || $role == "moderator")
+				<a href="{{ route('genre_page') }}"><h3>Страница жанров</h3></a> <br>
+			@endif
 			<a href="{{ route('personal_area_delete') }}"><h3>Удалить страницу</h3></a>
 		</div>
 	</div>

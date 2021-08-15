@@ -7,6 +7,8 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\DeveloperController;
 
 // Session group
 Route::group(["middleware" => "session"], function() {
@@ -32,6 +34,12 @@ Route::group(["middleware" => "session"], function() {
 
 		// Add game
 		Route::post("/game/add", [GameController::class, "game_add"])->name("game_add");
+
+		// Add developer page
+		Route::get("/developer/add/", [DeveloperController::class, "developer_add_page"])->name("developer_add_page");
+
+		// Add developer
+		Route::post("/developer/add/", [DeveloperController::class, "developer_add"])->name("developer_add");
 		
 		// Personal area
 		Route::get("/personal_area", [UserController::class, "personal_area"])->name("personal_area");
@@ -44,6 +52,20 @@ Route::group(["middleware" => "session"], function() {
 
 		// Delete user
 		Route::get("/personal_area/delete", [UserController::class, "personal_area_delete"])->name("personal_area_delete");
+
+		// Moderation routes
+		Route::group(["middleware" => "moderation"], function() {
+
+			// Genre page
+			Route::get("/genre", [GenreController::class, "genre_page"])->name("genre_page");
+
+			// Add genre
+			Route::post("/genre/add", [GenreController::class, "genre_add"])->name("genre_add");
+
+			// Delete genre
+			Route::get("/genre/delete", [GenreController::class, "genre_delete"])->name("genre_delete");
+
+		});
 
 		// Logout
 		Route::get("/logout", [AuthController::class, "logout"])->name("logout");

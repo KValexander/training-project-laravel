@@ -4,7 +4,7 @@
 
 @section("script")
 <script>
-	function game_add() {
+	function game_add(e) {
 		// Getting form data in formdata
 		let formData = new FormData(document.forms["game_add"]);
 
@@ -27,7 +27,10 @@
 			// Processing responses
 			switch(xhr.status) {
 				// Success
-				case 200: console.log(data); break;
+				case 200:
+					document.querySelector(".message").innerHTML = data;
+					e.target.reset();
+				break;
 				// Validation error
 				case 422:
 					for(key in data.errors)
@@ -43,7 +46,7 @@
 @endsection
 
 @section("content")
-	<form class="center" id="game_add" action="{{ route('game_add') }}" onsubmit="return game_add();">
+	<form class="center" id="game_add" action="{{ route('game_add') }}" onsubmit="return game_add(event);">
 		<fieldset>
 			<legend>Добавить игру</legend>
 			{{ csrf_field() }}

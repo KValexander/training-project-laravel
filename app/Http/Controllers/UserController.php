@@ -17,7 +17,7 @@ class UserController extends Controller
     public function personal_area() {
     	$user = Auth::user();
     	$data = (object)["user" => $user];
-    	return view("personal_area", ["data" => $data]);
+    	return view("user.personal_area", ["data" => $data]);
     }
 	// User data update page
     public function personal_area_update_page() {

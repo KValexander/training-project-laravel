@@ -14,7 +14,7 @@ class GameController extends Controller
 {
     // Add game page
     public function game_add_page() {
-    	return view("game_add");
+    	return view("game.game_add");
     }
 
     // Add game
@@ -36,7 +36,6 @@ class GameController extends Controller
 
     	// Image processing
     	$image_name = "1_". time() ."_". rand() .".". $request->file("cover")->extension();
-    	$request->file("cover")->move(public_path("images/"), $image_name);
     	$path = "public/images/". $image_name;
 
     	// Adding data to the database
@@ -47,6 +46,9 @@ class GameController extends Controller
     	$game->game_description = $request->input("description");
     	$game->developer_id 	= "0";
     	$game->save();
+
+        // Adding an image to the server
+        $request->file("cover")->move(public_path("images/"), $image_name);
 
     	// In case of success
     	return response()->json("Игра успешно добавлена", 200);
