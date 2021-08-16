@@ -86,7 +86,7 @@
 @endsection
 
 @section("content")
-	<form class="center">
+	<form class="center" onsubmit="return false;">
 		<fieldset>
 			<legend>Добавление жанра</legend>
 			<p class="error" id="genre"></p>

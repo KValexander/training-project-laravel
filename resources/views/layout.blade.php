@@ -19,6 +19,7 @@
 						<a href="{{ route('login_page') }}">Войти</a>
 					@else
 						<a href="{{ route('game_add_page') }}">Добавить игру</a>
+						<a href="{{ route('developer_add_page') }}">Добавить разработчика</a>
 						<a href="{{ route('personal_area') }}">Личный кабинет</a>
 						<a href="{{ route('logout') }}">Выход</a>
 					@endif

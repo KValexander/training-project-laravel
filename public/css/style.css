@@ -52,6 +52,20 @@ form.center {
 	margin: 0 auto;
 }
 
+form div.part {
+	display: flex;
+}
+
+form div.part input[type=text],
+form div.part select {
+	width: 69%;
+}
+
+form div.part input[type=button] {
+	width: 30%;
+	margin-left: 1%;
+}
+
 form fieldset {
 	padding: 10px;
 	margin: 0 auto;
@@ -151,6 +165,25 @@ div.flex div.left {
 div.flex div.right {
 	width: 30%;
 	margin-left: 1%;
+}
+
+form#game_add div.genres {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+form#game_add div.genres div.genre {
+	color: white;
+	cursor: pointer;
+	transition: .2s;
+	margin-right: 5px;
+	padding: 5px 10px;
+	margin-bottom: 5px;
+	background-color: #666;
+}
+
+form#game_add div.genres div.genre:hover {
+	background-color: #333;
 }
 
 footer {

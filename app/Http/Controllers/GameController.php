@@ -9,12 +9,24 @@ use Auth;
 
 // Connecting models
 use App\Models\GameModel;
+use App\Models\GenreModel;
+use App\Models\DeveloperModel;
+use App\Models\GameGenreModel;
 
 class GameController extends Controller
 {
     // Add game page
     public function game_add_page() {
-    	return view("game.game_add");
+        // Get data
+        $genres = GenreModel::all();
+        $developers = DeveloperModel::all();
+        // Composing object
+        $data = (object)[
+            "genres" => $genres,
+            "developers" => $developers
+        ];
+        // Return view with data
+    	return view("game.game_add", ["data" => $data]);
     }
 
     // Add game
@@ -25,6 +37,8 @@ class GameController extends Controller
     		"title" => "required|string|max:100",
     		"year_release" => "required|numeric|regex:/\d{4}/",
     		"description" => "required|string",
+            "genres" => "required",
+            "developer_id" => "required|numeric"
     	]);
         // If there are validation errors
     	if($validator->fails()) {
@@ -44,8 +58,17 @@ class GameController extends Controller
     	$game->game_title 		= $request->input("title");
     	$game->game_release 	= $request->input("year_release");
     	$game->game_description = $request->input("description");
-    	$game->developer_id 	= "0";
+    	$game->developer_id 	= $request->input("developer_id");
     	$game->save();
+
+        // Adding genres
+        $genres = explode(",", $request->input("genres"));
+        foreach($genres as $id) {
+            $ggm = new GameGenreModel;
+            $ggm->game_id = $game->id;
+            $ggm->genre_id = $id;
+            $ggm->save();
+        }
 
         // Adding an image to the server
         $request->file("cover")->move(public_path("images/"), $image_name);

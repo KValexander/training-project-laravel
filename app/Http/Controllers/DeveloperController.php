@@ -30,14 +30,14 @@ class DeveloperController extends Controller
         if($validator->fails()) {
         	return response()->json([
         		"message" => "Validation errors",
-        		"errors" => $vaidator->errors
+        		"errors" => $validator->errors()
         	], 422);
         }
 
     	// Adding data to the database
         $developer = new DeveloperModel;
         $developer->developer_title = $request->input("title");
-        $developer->developer_release = $request->input("year_release");
+        $developer->developer_foundation = $request->input("year_release");
         $developer->developer_description = $request->input("description");
         $developer->save();
 
