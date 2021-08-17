@@ -15,9 +15,11 @@ class CreateDeveloperModelsTable extends Migration
     {
         Schema::create('developers', function (Blueprint $table) {
             $table->id();
+            $table->integer("user_id");
             $table->string("developer_title", 100);
             $table->year("developer_foundation");
             $table->text("developer_description");
+            $table->tinyInteger("state")->default(0);
             $table->timestamps();
         });
     }

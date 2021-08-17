@@ -19,7 +19,7 @@ class GameController extends Controller
     public function game_add_page() {
         // Get data
         $genres = GenreModel::all();
-        $developers = DeveloperModel::all();
+        $developers = DeveloperModel::where("state", "1")->get();
         // Composing object
         $data = (object)[
             "genres" => $genres,
@@ -35,7 +35,7 @@ class GameController extends Controller
     	$validator = Validator::make($request->all(), [
     		"cover" => "required|max:1048|mimes:jpg,png",
     		"title" => "required|string|max:100",
-    		"year_release" => "required|numeric|regex:/\d{4}/",
+    		"year_release" => "required|numeric|regex:/^20\d{2}$/",
     		"description" => "required|string",
             "genres" => "required",
             "developer_id" => "required|numeric"
@@ -54,11 +54,12 @@ class GameController extends Controller
 
     	// Adding data to the database
     	$game = new GameModel;
-    	$game->game_cover 		= $path;
-    	$game->game_title 		= $request->input("title");
-    	$game->game_release 	= $request->input("year_release");
+        $game->user_id = Auth::id();
+    	$game->game_cover = $path;
+    	$game->game_title = $request->input("title");
+    	$game->game_release = $request->input("year_release");
     	$game->game_description = $request->input("description");
-    	$game->developer_id 	= $request->input("developer_id");
+    	$game->developer_id = $request->input("developer_id");
     	$game->save();
 
         // Adding genres

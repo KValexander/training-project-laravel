@@ -11,7 +11,7 @@
 		// Composing object
 		let dataJSON = JSON.stringify({
 			"title": form.elements["title"].value,
-			"year_release": form.elements["year_release"].value,
+			"year_foundation": form.elements["year_foundation"].value,
 			"description": form.elements["description"].value,
 		});
 		// Instantiating a request
@@ -60,8 +60,8 @@
 			<p class="error" id="title"></p>
 			<input type="text" placeholder="Название" name="title">
 
-			<p class="error" id="year_release"></p>
-			<input type="number" placeholder="Год основания" name="year_release">
+			<p class="error" id="year_foundation"></p>
+			<input type="number" placeholder="Год основания" name="year_foundation">
 
 			<p class="error" id="description"></p>
 			<textarea name="description" placeholder="Описание"></textarea>

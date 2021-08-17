@@ -23,7 +23,7 @@ class DeveloperController extends Controller
         // Data validation
     	$validator = Validator::make($request->all(), [
     		"title" => "required|string|max:100",
-    		"year_release" => "required|numeric|regex:/\d{4}/",
+    		"year_foundation" => "required|numeric|regex:/^20\d{2}$/",
     		"description" => "required|string",
     	]);
         // If there are validation errors
@@ -36,12 +36,13 @@ class DeveloperController extends Controller
 
     	// Adding data to the database
         $developer = new DeveloperModel;
+        $developer->user_id = Auth::id();
         $developer->developer_title = $request->input("title");
-        $developer->developer_foundation = $request->input("year_release");
+        $developer->developer_foundation = $request->input("year_foundation");
         $developer->developer_description = $request->input("description");
         $developer->save();
 
         // In case of success
-        return response()->json("Разработчик успешно добавлен", 200);
+        return response()->json("Разработчик отправлен на модерацию", 200);
     }
 }

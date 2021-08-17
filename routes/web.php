@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\ModerationController;
 
 // Session group
 Route::group(["middleware" => "session"], function() {
@@ -55,6 +56,9 @@ Route::group(["middleware" => "session"], function() {
 
 		// Moderation routes
 		Route::group(["middleware" => "moderation"], function() {
+
+			// Moderation page
+			Route::get("/moderation", [ModerationController::class, "moderation_page"])->name("moderation_page");
 
 			// Genre page
 			Route::get("/genre", [GenreController::class, "genre_page"])->name("genre_page");

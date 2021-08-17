@@ -57,11 +57,13 @@ class UserController extends Controller
 
 	// Delete user
 	public function personal_area_delete() {
-		// Gettin a user
+		// Getting a user
 		$user_id = Auth::id();
 		$user = UserModel::find($user_id);
 		// Delete user
 		$user->delete();
+        // Logout
+        Auth::logout();
         // In case of success
 		return redirect()->route("main_page")->withErrors("Страница успешно удалён", "message");
 	}

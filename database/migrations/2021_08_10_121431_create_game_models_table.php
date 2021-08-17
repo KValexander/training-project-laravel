@@ -15,11 +15,13 @@ class CreateGameModelsTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
+            $table->integer("user_id");
             $table->string("game_cover", 100);
             $table->string("game_title", 100);
             $table->year("game_release");
             $table->text("game_description");
             $table->integer("developer_id");
+            $table->tinyInteger("state")->default(0);
             $table->timestamps();
         });
     }
