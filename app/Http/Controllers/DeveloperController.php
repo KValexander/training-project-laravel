@@ -13,6 +13,11 @@ use App\Models\DeveloperModel;
 
 class DeveloperController extends Controller
 {
+    // Developer page
+    public function developer_page() {
+        
+    }
+
     // Add developer page
     public function developer_add_page() {
     	return view("developer.developer_add");

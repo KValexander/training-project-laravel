@@ -75,6 +75,6 @@ class GameController extends Controller
         $request->file("cover")->move(public_path("images/"), $image_name);
 
     	// In case of success
-    	return response()->json("Игра успешно добавлена", 200);
+    	return response()->json("Игра отправлена на модерацию", 200);
     }
 }

@@ -167,6 +167,23 @@ div.flex div.right {
 	margin-left: 1%;
 }
 
+div.flex div.point,
+div.wrap div.point {
+	margin: 10px 0;
+}
+
+div.flex div.point h3,
+div.wrap div.point h3 {
+	margin-bottom: 5px;
+}
+
+div.flex div.structure {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	border-bottom: solid 1px black;
+}
+
 form#game_add div.genres {
 	display: flex;
 	flex-wrap: wrap;
@@ -184,6 +201,23 @@ form#game_add div.genres div.genre {
 
 form#game_add div.genres div.genre:hover {
 	background-color: #333;
+}
+
+div.games,
+div.developers {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+div.developers div.developer {
+	width: 24%;
+	padding: 10px;
+	margin: 10px 0;
+	border-radius: 5px;
+	text-align: center;
+	border: solid 1px rgba(0,0,0,0.5);
+	box-shadow: 0 0 3px rgba(0,0,0,0.5);
 }
 
 footer {

@@ -17,6 +17,9 @@ Route::group(["middleware" => "session"], function() {
 	// Main page
 	Route::get("/", [MainController::class, "main_page"])->name("main_page");
 
+	// Developer page
+	Route::get("/developers/{id}", [DeveloperController::class, "developer_page"])->name("developer_page");
+
 	// Register page
 	Route::get("/register", [AuthController::class, "register_page"])->name("register_page");
 	// Register
@@ -59,6 +62,15 @@ Route::group(["middleware" => "session"], function() {
 
 			// Moderation page
 			Route::get("/moderation", [ModerationController::class, "moderation_page"])->name("moderation_page");
+
+			// Approve developer
+			Route::get("/moderation/approve/developer", [ModerationController::class, "approve_developer"])->name("moderation_approve_developer");
+
+			// Approve game
+
+			Route::get("/moderation/approve/game", [ModerationController::class, "approve_game"])->name("moderation_approve_game");
+			// Detele user
+			Route::get("/moderation/delete/user", [ModerationController::class, "delete_user"])->name("moderation_delete_user");
 
 			// Genre page
 			Route::get("/genre", [GenreController::class, "genre_page"])->name("genre_page");
