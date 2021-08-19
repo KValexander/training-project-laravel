@@ -9,7 +9,22 @@
 		<div class="point">
 			<h3>Последние добавленные игры</h3> <hr>
 			<div class="games">
-				<p>Данные отсутствуют</p>
+				@if(count($data->games) == 0)
+					<p>Данные отсутствуют</p>
+				@else
+					@foreach($data->games as $val)
+						<div class="game">
+							<a href="">
+								<div class="image">
+									<img src="{{ asset($val->game_cover) }}" alt="">
+								</div>
+								<div class="title">
+									<h3>{{ $val->game_title }}</h3>
+								</div>
+							</a>
+						</div>
+					@endforeach
+				@endif
 			</div>
 		</div><br>
 

@@ -15,8 +15,8 @@ class ModerationController extends Controller
     public function moderation_page() {
     	// Get data
     	$users = UserModel::all();
-    	$games = GameModel::where("state", 0)->get();
-    	$developers = DeveloperModel::where("state", 0)->get();
+    	$games = GameModel::all();
+    	$developers = DeveloperModel::all();
     	// Composing an object
     	$data = (object)[
     		"users" => $users,
@@ -51,6 +51,32 @@ class ModerationController extends Controller
     	$game->save();
     	// In case of success
     	return redirect()->route("moderation_page")->withErrors("Игра ". $game->game_title . " одобрена", "message");
+    }
+
+    // Condemn developer
+    public function condemn_developer(Request $request) {
+        // Get id
+        $id = $request->input("developer_id");
+        // Get developer
+        $developer = DeveloperModel::find($id);
+        // Update data
+        $developer->state = 0;
+        $developer->save();
+        // In case of success
+        return redirect()->route("moderation_page")->withErrors("Разработчик ". $developer->developer_title . " отправлен на модерацию");
+    }
+
+    // Condemn game
+    public function condemn_game(Request $request) {
+        // Get id
+        $id = $request->input("game_id");
+        // Get game
+        $game = GameModel::find($id);
+        // Update data
+        $game->state = 0;
+        $game->save();
+        // In case of success
+        return redirect()->route("moderation_page")->withErrors("Игра ". $game->game_title . " отправлена на модерацию");
     }
 
     // Delete user

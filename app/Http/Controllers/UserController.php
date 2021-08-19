@@ -32,13 +32,18 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             "username" => "required|string|max:100|min:3",
             "email" => "required|email|max:100",
-            "password" => "required|string|max:100|min:3|required_with:password_check|same:password_check",
-            "password_check" => "required|string|max:100|min:3",
         ]);
-
         // If there are validation errors
         if($validator->fails())
             return redirect()->route("personal_area_update")->withErrors($validator, "register");
+
+        // Password validation
+        if($request->input("password") != "" || $request->input("password_check") != "") {
+            $validator = Validator::make($request->all(), [
+                "password" => "required|string|max:100|min:3|required_with:password_check|same:password_check",
+                "password_check" => "required|string|max:100|min:3",
+            ]); if($validator->fails()) return redirect()->route("personal_area_update")->withErrors($validator, "register");
+        }
 
         // Getting a user
         $user_id = Auth::id();
@@ -46,7 +51,8 @@ class UserController extends Controller
         // Data update
         $user->username = $request->input("username");
         $user->email = $request->input("email");
-        $user->password = bcrypt($request->input("password"));
+        if($request->input("password") != "")
+            $user->password = bcrypt($request->input("password"));
         $user->role = "user";
         // Saving data
         $user->save();

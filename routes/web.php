@@ -65,10 +65,15 @@ Route::group(["middleware" => "session"], function() {
 
 			// Approve developer
 			Route::get("/moderation/approve/developer", [ModerationController::class, "approve_developer"])->name("moderation_approve_developer");
-
 			// Approve game
-
 			Route::get("/moderation/approve/game", [ModerationController::class, "approve_game"])->name("moderation_approve_game");
+			
+			// Condemn developer
+			Route::get("/moderation/condemn/developer", [ModerationController::class, "condemn_developer"])->name("moderation_condemn_developer");
+			// Condemn game
+			Route::get("/moderation/condemn/game", [ModerationController::class, "condemn_game"])->name("moderation_condemn_game");
+
+
 			// Detele user
 			Route::get("/moderation/delete/user", [ModerationController::class, "delete_user"])->name("moderation_delete_user");
 

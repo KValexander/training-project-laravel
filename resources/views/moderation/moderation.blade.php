@@ -42,10 +42,14 @@
 					@foreach($data->developers as $val)
 						<div class="structure">
 							<div class="name">
-								<a href="">{{ $val->developer_title }}</a>
+								<a href="{{ route('developer_page', ['id' => $val->id]) }}">{{ $val->developer_title }}</a>
 							</div>
 							<div class="action">
-								<a href="{{ route('moderation_approve_developer', ['developer_id' => $val->id]) }}">Одобрить</a>
+								@if($val->state == 0)
+									<a href="{{ route('moderation_approve_developer', ['developer_id' => $val->id]) }}">Одобрить</a>
+								@else
+									<a href="{{ route('moderation_condemn_developer', ['developer_id' => $val->id]) }}">Отправить на модерацию</a>
+								@endif
 							</div>
 						</div>
 					@endforeach
@@ -63,7 +67,11 @@
 								<a href="">{{ $val->game_title }} / {{ $val->game_release }}</a>
 							</div>
 							<div class="action">
-								<a href="{{ route('moderation_approve_game', ['game_id' => $val->id]) }}">Одобрить</a>
+								@if($val->state == 0)
+									<a href="{{ route('moderation_approve_game', ['game_id' => $val->id]) }}">Одобрить</a>
+								@else
+									<a href="{{ route('moderation_condemn_game', ['game_id' => $val->id]) }}">Отправить на модерацию</a>
+								@endif
 							</div>
 						</div>
 					@endforeach
