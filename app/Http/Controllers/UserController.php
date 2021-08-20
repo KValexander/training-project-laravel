@@ -13,6 +13,20 @@ use App\Models\UserModel;
 
 class UserController extends Controller
 {
+    // User page
+    public function user_page(Request $request) {
+        // Get data
+        $user_id = $request->route("id");
+        $user = UserModel::find($user_id);
+        // Check user
+        if($user == NULL)
+            return redirect()->route("main_page")->withErrors("Такого пользователя не существует", "message");
+        // Composing object
+        $data = (object)["user" => $user];
+        // Return view with data
+        return view("user.user", ["data" => $data]);
+    }
+
     // Personal area
     public function personal_area() {
     	$user = Auth::user();
@@ -53,7 +67,7 @@ class UserController extends Controller
         $user->email = $request->input("email");
         if($request->input("password") != "")
             $user->password = bcrypt($request->input("password"));
-        $user->role = "user";
+        $user->role = Auth::user()->role;
         // Saving data
         $user->save();
 

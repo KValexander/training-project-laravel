@@ -63,7 +63,7 @@ class ModerationController extends Controller
         $developer->state = 0;
         $developer->save();
         // In case of success
-        return redirect()->route("moderation_page")->withErrors("Разработчик ". $developer->developer_title . " отправлен на модерацию");
+        return redirect()->route("moderation_page")->withErrors("Разработчик ". $developer->developer_title . " отправлен на модерацию", "message");
     }
 
     // Condemn game
@@ -76,7 +76,50 @@ class ModerationController extends Controller
         $game->state = 0;
         $game->save();
         // In case of success
-        return redirect()->route("moderation_page")->withErrors("Игра ". $game->game_title . " отправлена на модерацию");
+        return redirect()->route("moderation_page")->withErrors("Игра ". $game->game_title . " отправлена на модерацию", "message");
+    }
+
+    // Search users
+    public function search_users(Request $request) {
+        // Get query
+        $query = $request->input("query");
+        // Search data
+        $data = UserModel::where("id", $query)
+            ->orWhere("login", "LIKE", "%". $query ."%")
+            ->orWhere("username", "LIKE", "%". $query ."%")
+            ->orWhere("email")
+            ->get();
+        if($query == "") $data = UserModel::all();
+        // Return response
+        return response()->json(["data" => $data], 200);
+    }
+
+    // Search developers
+    public function search_developers(Request $request) {
+        // Get query
+        $query = $request->input("query");
+        // Search data
+        $data = DeveloperModel::where("id", $query)
+            ->orWhere("developer_title", "LIKE", "%". $query ."%")
+            ->orWhere("developer_foundation", "LIKE", "%". $query ."%")
+            ->get();
+        if($query == "") $data = DeveloperModel::all();
+        // Return response
+        return response()->json(["data" => $data], 200);
+    }
+
+    // Search games
+    public function search_games(Request $request) {
+        // Get query
+        $query = $request->input("query");
+        // Search data
+        $data = GameModel::where("id", $query)
+            ->orWhere("game_title", "LIKE", "%". $query ."%")
+            ->orWhere("game_release", "LIKE", "%". $query ."%")
+            ->get();
+        if($query == "") $data = GameModel::all();
+        // Return response
+        return response()->json(["data" => $data], 200);
     }
 
     // Delete user

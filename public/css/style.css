@@ -24,6 +24,16 @@ img {
 	max-width: 100%;
 }
 
+input {
+	width: 100%;
+	height: 40px;
+	margin: 10px 0;
+	font-size: 14pt;
+	padding-left: 5px;
+	font-family: Arial;
+	border: solid 1px black;
+}
+
 .underline {
 	text-decoration: underline;
 }
@@ -174,6 +184,18 @@ div.flex div.right {
 	margin-left: 1%;
 }
 
+div.flex nav {
+	margin: 5px 0;
+}
+
+div.flex nav a {
+	padding: 0 5px;
+}
+
+div.flex nav a:first-child {
+	padding-left: 0px;
+}
+
 div.flex div.point,
 div.wrap div.point {
 	margin: 10px 0;
@@ -189,6 +211,15 @@ div.flex div.structure {
 	justify-content: space-between;
 	padding: 10px;
 	border-bottom: solid 1px black;
+}
+
+div.flex div.structure div.name {
+	width: 70%;
+}
+
+div.flex div.structure div.action {
+	width: 30%;
+	text-align: right;
 }
 
 form#game_add div.genres {
